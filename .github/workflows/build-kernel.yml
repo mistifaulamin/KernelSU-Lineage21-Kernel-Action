@@ -26,7 +26,7 @@ jobs:
       CCACHE_HARDLINK: "true"
     steps:
     - name: Check out
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Read the configuration
       run: |
@@ -348,7 +348,7 @@ jobs:
 
     - name: Upload ${{ env.KERNEL_IMAGE_NAME }}
       if: env.CHECK_FILE_IS_OK == 'true'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ env.KERNEL_IMAGE_NAME }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
         path: kernel_workspace/android-kernel/out/arch/${{ env.ARCH }}/boot/${{ env.KERNEL_IMAGE_NAME }}
