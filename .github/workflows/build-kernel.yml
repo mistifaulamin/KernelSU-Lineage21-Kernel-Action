@@ -16,7 +16,7 @@ jobs:
       contents: write
     name: Build by ${{ github.actor }}
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
+    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
     env:
       DEVICE: lavender
       KERNEL_SOURCE: https://github.com/LineageOS/android_kernel_xiaomi_lavender
