@@ -19,7 +19,7 @@ jobs:
     name: Build by ${{ github.actor }}
     env:
       DEVICE: lavender
-      KERNELSOURCE: https://github.com/LineageOS/androidkernelxiaomilavender
+      KERNEL_SOURCE: https://github.com/LineageOS/android_kernel_xiaomi_lavender
       BRANCH: lineage-21
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
