@@ -109,17 +109,17 @@ jobs:
         if: env.ENABLE_CLANG == 'true' && env.USE_AOSP_CLANG == 'false' && env.USE_CUSTOM_CLANG == 'true'
         run: |
           cd $GITHUB_WORKSPACE/kernel_workspace
-          if [[ ${{ env.CUSTOM_CLANG_SOURCE }} =~ git ]]; then
-              if [[ ${{ env.CUSTOM_CLANG_SOURCE }} == *'.tar.gz' ]]; then
-                  wget -O clang.tar.gz ${{ env.CUSTOM_CLANG_SOURCE }}
+          if [[ "$CUSTOM_CLANG_SOURCE" =~ git ]]; then
+              if [[ "$CUSTOM_CLANG_SOURCE" == *'.tar.gz' ]]; then
+                  wget -O clang.tar.gz "$CUSTOM_CLANG_SOURCE"
                   mkdir clang
                   tar -C clang/ -zxvf clang.tar.gz
                   rm -rf clang.tar.gz
               else
-                  git clone ${{ env.CUSTOM_CLANG_SOURCE }} -b ${{ env.CUSTOM_CLANG_BRANCH }} clang --depth=1
-              fi        
+                  git clone "$CUSTOM_CLANG_SOURCE" -b "$CUSTOM_CLANG_BRANCH" clang --depth=1
+              fi
           else
-              wget -O clang.zip ${{ env.CUSTOM_CLANG_SOURCE }}
+              wget -O clang.zip "$CUSTOM_CLANG_SOURCE"
               mkdir clang
               unzip clang.zip -d clang/
               rm -rf clang.zip
