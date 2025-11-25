@@ -12,14 +12,14 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
     runs-on: ubuntu-latest
+    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
     permissions:
       contents: write
     name: Build by ${{ github.actor }}
     env:
       DEVICE: lavender
-      KERNEL_SOURCE: https://github.com/LineageOS/android_kernel_xiaomi_lavender
+      KERNELSOURCE: https://github.com/LineageOS/androidkernelxiaomilavender
       BRANCH: lineage-21
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
