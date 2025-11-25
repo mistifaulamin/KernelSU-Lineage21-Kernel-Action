@@ -16,7 +16,6 @@ jobs:
       contents: write
     name: Build by ${{ github.actor }}
     runs-on: ubuntu-latest
-    if: ${{ github.event.repository.owner.id == github.event.sender.id }}
     env:
       DEVICE: lavender
       KERNEL_SOURCE: https://github.com/LineageOS/android_kernel_xiaomi_lavender
@@ -25,8 +24,9 @@ jobs:
       CCACHE_NOHASHDIR: "true"
       CCACHE_HARDLINK: "true"
     steps:
-    - name: Check out
-      uses: actions/checkout@v4
+      - name: Check out
+        if: ${{ github.event.repository.owner.id == github.event.sender.id }}
+        uses: actions/checkout@v4
 
     - name: Read the configuration
       run: |
