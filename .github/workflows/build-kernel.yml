@@ -27,6 +27,7 @@ jobs:
       CUSTOM_GCC_32_SOURCE: https://github.com/magojohnji/gcc-arm32.git
       CUSTOM_GCC_32_BRANCH: master
       CUSTOM_GCC_32_BIN: arm-linux-androideabi-
+      KERNELSU_SOURCE_BOOT_IMAGE: https://github.com/<repo>/releases/download/.../thor-boot.img
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -217,11 +218,16 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/kernel_workspace
           mkdir bootimg_tmp
-          wget -O ./bootimg_tmp/boot-source-kernelsu.img ${{ env.KERNELSU_SOURCE_BOOT_IMAGE }}
-          if [ -f ./bootimg_tmp/boot-source-kernelsu.img ]; then
+          # cek dulu apakah URL bisa diakses, lalu batasi retry
+          if wget --spider "$KERNELSU_SOURCE_BOOT_IMAGE"; then
+            wget --timeout=30 --tries=3 -O ./bootimg_tmp/boot-source-kernelsu.img "$KERNELSU_SOURCE_BOOT_IMAGE"
+            if [ -f ./bootimg_tmp/boot-source-kernelsu.img ]; then
               echo "HAVE_KERNELSU_SOURCE_BOOT_IMAGE=true" >> $GITHUB_ENV
               echo "SOURCE_KERNELSU_BOOTIMG_PATH=$GITHUB_WORKSPACE/kernel_workspace/bootimg_tmp/boot-source-kernelsu.img" >> $GITHUB_ENV
-          fi  
+            fi
+          else
+            echo "Boot image source not reachable, skipping download"
+          fi
       
       - name: Setup KernelSU
         if: env.ENABLE_KERNELSU == 'true'
