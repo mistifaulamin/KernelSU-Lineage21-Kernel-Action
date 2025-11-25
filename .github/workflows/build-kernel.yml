@@ -27,7 +27,7 @@ jobs:
       CUSTOM_GCC_32_SOURCE: https://github.com/magojohnji/gcc-arm32.git
       CUSTOM_GCC_32_BRANCH: master
       CUSTOM_GCC_32_BIN: arm-linux-androideabi-
-      KERNELSU_SOURCE_BOOT_IMAGE: https://github.com/<repo>/releases/download/.../thor-boot.img
+      KERNELSU_SOURCE_BOOT_IMAGE: https://raw.githubusercontent.com/mistifaulamin/lineage/main/bootimg/boot-source-kernelsu.img
     steps:
       - name: Check out
         uses: actions/checkout@v4
