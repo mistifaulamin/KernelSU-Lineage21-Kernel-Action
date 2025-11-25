@@ -24,6 +24,9 @@ jobs:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
       CCACHE_HARDLINK: "true"
+      CUSTOM_GCC_32_SOURCE: https://github.com/magojohnji/gcc-arm32.git
+      CUSTOM_GCC_32_BRANCH: master
+      CUSTOM_GCC_32_BIN: arm-linux-androideabi-
     steps:
       - name: Check out
         uses: actions/checkout@v4
